@@ -17,6 +17,7 @@ export default async ({ req, res, log, error }) => {
 
     console.log('req.body type:', typeof req.body);
     console.log('req.body content:', req.body);
+    console.log('key:', process.env.APPWRITE_API_KEY)
 
     await users.delete(userId);
 

@@ -17,7 +17,12 @@ export default async ({ req, res, log, error }) => {
 
     console.log('req.body type:', typeof req.body);
     console.log('req.body content:', req.body);
-    console.log('key:', process.env.APPWRITE_API_KEY)
+    //console.log('key:', process.env.APPWRITE_API_KEY)
+
+    console.log('Users List:');
+    response.users.forEach(user => {
+      console.log(`ID: ${user.$id}, Email: ${user.email}`);
+    });
 
     await users.delete(userId);
 

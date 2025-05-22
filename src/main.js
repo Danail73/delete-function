@@ -15,7 +15,7 @@ export default async ({ req, res, log, error }) => {
     console.log('req.body:', req.body);
     console.log('req.variables:', req.variables);
 
-    const userId = req.payload.userId;
+    const userId = req.body.userId;
     if (!userId) throw new Error('Missing userId in payload');
 
     await users.delete(userId);

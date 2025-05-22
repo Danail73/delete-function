@@ -8,13 +8,15 @@ export default async ({ req, res, log, error }) => {
       .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
       .setKey(process.env.APPWRITE_API_KEY);
 
-    const account = new Account(client);
+      const users = new Users(client);
 
-    // Delete the currently authenticated user's account
-    await account.delete();
-
-    // Return success response
-    return res.json({ success: true, message: 'Account deleted successfully.' });
+      // Assume userId is passed in request payload
+      const userId = req.payload.userId;
+      if (!userId) throw new Error('Missing userId in payload');
+  
+      await users.delete(userId);
+  
+      return res.json({ success: true, message: 'Account deleted successfully.' });
 
   } catch (err) {
     error('Failed to delete account: ' + err.message);

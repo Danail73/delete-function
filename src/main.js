@@ -11,12 +11,12 @@ export default async ({ req, res, log, error }) => {
     const users = new Users(client);
 
     // Assume userId is passed in request payload
-    console.log('req.payload:', req.payload);
-    console.log('req.body:', req.body);
-    console.log('req.variables:', req.variables);
-
-    const userId = req.body.userId;
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+    const userId = body?.userId;
     if (!userId) throw new Error('Missing userId in payload');
+
+    console.log('req.body type:', typeof req.body);
+    console.log('req.body content:', req.body);
 
     await users.delete(userId);
 

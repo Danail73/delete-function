@@ -11,6 +11,7 @@ export default async ({ req, res, log, error }) => {
       const users = new Users(client);
 
       // Assume userId is passed in request payload
+      console.log('req.payload:', req.payload);
       const userId = req.payload.userId;
       if (!userId) throw new Error('Missing userId in payload');
   
